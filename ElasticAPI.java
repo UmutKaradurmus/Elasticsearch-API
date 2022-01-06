@@ -137,18 +137,18 @@ public class ElasticAPI {
 //------------------------------------------------------------------------------------------------------------------------------------------//
     //this for specific field name value from json its taking parameter as a string(return paramter from search)
     //I thought making json object can be faster than search to all document and if not i will change this to pattern and macher func.
-    public long getvalue(String tmp) {
+       public long getvalue(String tmp) {
         long result = 0;
         try {
 
             JSONParser parser = new JSONParser();
             JSONObject json = (JSONObject) parser.parse(tmp);
 
-            JSONObject json1 = (JSONObject) json.get("hits");
+            json = (JSONObject) json.get("hits");
 
-            JSONObject json2 = (JSONObject) json1.get("total");
+            json = (JSONObject) json.get("total");
 
-            result = (Long) json2.get("value");
+            result = (Long) json.get("value");
             return result;
         } catch (ParseException ex) {
             Logger.getLogger(ElasticAPI.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,10 +160,10 @@ public class ElasticAPI {
         try {
 
             JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(tmp);
+            json = (JSONObject) parser.parse(tmp);
 
-            JSONObject json1 = (JSONObject) json.get("_shards");
-        Long successful=(Long)json1.get("successful");
+             json = (JSONObject) json.get("_shards");
+        Long successful=(Long)json.get("successful");
        
             if (successful>0) {
                 result=true;
